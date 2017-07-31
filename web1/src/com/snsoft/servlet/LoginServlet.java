@@ -21,7 +21,7 @@ import com.snsoft.util.JsonUtils;
  * 
  * @copyright ：神农大学生软件创新中心 版权所有 © 2017
  * 
- * @author 14信息慎伟康
+ * @author 慎伟康
  * 
  * @version 1.0
  * 
@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
-		HashMap<String, String> param = JsonUtils.getRequestParams(request);
+		HashMap<String, String> param = JsonUtils.getRequestParameters(request);
 		System.out.println("account-->" + param.get("account"));
 		System.out.println("password-->" + param.get("password"));
 		System.out.println("------------------------------------------");
@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
 		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("utf-8");
-		response.getWriter().write(JsonUtils.jsonResponse(null, AllConstant.CODE_ERROR, "请求异常！"));	
+		response.getWriter().write(JsonUtils.objectToJson(null, AllConstant.CODE_ERROR, "请求异常！"));	
 	}
 
 	/**
@@ -68,30 +68,30 @@ public class LoginServlet extends HttpServlet {
 		//返回结果
 		String result = "";
 		//解析请求中的参数
-		HashMap<String, String> param = JsonUtils.getRequestParams(request);
+		HashMap<String, String> param = JsonUtils.getRequestParameters(request);
 		System.out.println("account-->" + param.get("account"));
 		System.out.println("password-->" + param.get("password"));
 		//参数校验
 		if(StringUtils.isEmpty(param.get("account"))){
-			result = JsonUtils.jsonResponse(null, AllConstant.CODE_ERROR, "账号不能为空！");
+			result = JsonUtils.objectToJson(null, AllConstant.CODE_ERROR, "账号不能为空！");
 		}else if(StringUtils.isEmpty(param.get("password"))){
-			result = JsonUtils.jsonResponse(null, AllConstant.CODE_ERROR, "密码不能为空！");
+			result = JsonUtils.objectToJson(null, AllConstant.CODE_ERROR, "密码不能为空！");
 		}else{
 			try {
 				//调用dao
 				LoginDao ld = new LoginDao();
 				HashMap<String, Object> res = ld.getUserInfo(param);
 				if(res == null){
-					result = JsonUtils.jsonResponse(null, AllConstant.CODE_ERROR, "该账号不存在！");
+					result = JsonUtils.objectToJson(null, AllConstant.CODE_ERROR, "该账号不存在！");
 				}else{
 					if(param.get("password").equals(res.get("password"))){
-						result = JsonUtils.jsonResponse(res, AllConstant.CODE_SUCCESS, "登录成功！");
+						result = JsonUtils.objectToJson(res, AllConstant.CODE_SUCCESS, "登录成功！");
 					}else{
-						result = JsonUtils.jsonResponse(null, AllConstant.CODE_ERROR, "密码错误！");
+						result = JsonUtils.objectToJson(null, AllConstant.CODE_ERROR, "密码错误！");
 					}
 				}
 			} catch (SQLException e) {
-				result = JsonUtils.jsonResponse(null, AllConstant.CODE_ERROR, AllConstant.MSG_ERROR);
+				result = JsonUtils.objectToJson(null, AllConstant.CODE_ERROR, AllConstant.MSG_ERROR);
 				e.printStackTrace();
 			}
 			

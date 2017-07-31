@@ -4,14 +4,14 @@ package com.snsoft.util;
  * 
  * @copyright ：神农大学生软件创新中心 版权所有 © 2016
  * 
- * @author 14信息慎伟康
+ * @author 慎伟康
  * 
  * @version 1.0
  * 
  * @date 2016年10月20日 下午1:57:20
  * 
  * @Description TODO
- *    全局常量
+ *    全局常量，项目中用到次数较多的变量尽量都放这里。
  */
 public interface AllConstant {
 	

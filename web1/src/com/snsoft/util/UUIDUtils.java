@@ -21,26 +21,29 @@ public final class UUIDUtils {
 		super();
 	}
 	
+	
 	/**
 	 * 获取UUID（带'-'）
 	 * @return
 	 * @Description TODO
 	 */
-	public static String uuid() {
+	public static String getOneUUID() {
 		return UUID.randomUUID().toString();
 	}
+	
 	
 	/**
 	 * 获得一个UUID (去除'-')
 	 * @return
 	 * @Description TODO
 	 */
-	public static String getUUID() {
-		String s = uuid();
+	public static String getShorterUUID() {
+		String s = getOneUUID();
 		// 去掉“-”符号
 		return s.substring(0, 8) + s.substring(9, 13) + s.substring(14, 18)
 				+ s.substring(19, 23) + s.substring(24);
 	}
+	
 	
 	/**
 	 * 获得指定数目的UUID(生成多个UUID)
@@ -48,13 +51,13 @@ public final class UUIDUtils {
 	 * @return  String[] UUID数组
 	 * @Description TODO
 	 */
-	public static String[] getUUID(int number) {
+	public static String[] getMoreUUID(int number) {
 		if (number < 1) {
 			return null;
 		}
 		String[] ss = new String[number];
 		for (int i = 0; i < number; i++) {
-			ss[i] = getUUID();
+			ss[i] = getShorterUUID();
 		}
 		return ss;
 	}

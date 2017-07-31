@@ -16,14 +16,14 @@ import net.sf.json.JSONObject;
  * 
  * @copyright ：神农大学生软件创新中心 版权所有 © 2016
  * 
- * @author 14信息慎伟康
+ * @author 慎伟康
  * 
  * @version 1.0
  * 
  * @date 2016年10月20日 下午1:59:44
  * 
  * @Description TODO
- *    json工具类
+ *    json工具类，解析Json，封装Json。
  *    commons-beanutils-1.9.3.jar
  *    commons-collections-3.2.2.jar
  *    commons-lang-2.6.jar
@@ -42,7 +42,7 @@ public final class JsonUtils {
 	 * @return
 	 * @Description TODO
 	 */
-	public static String jsonResponse(Object data, int code, String msg){
+	public static String objectToJson(Object data, int code, String msg){
 		HashMap<String, Object> resultMap= new HashMap<String, Object>();//返回结果
 		resultMap.put("code", code);
 		resultMap.put("msg", msg);
@@ -52,6 +52,7 @@ public final class JsonUtils {
 		return jsonObject.toString();
 	}
 	
+	
 	/**
 	 * 将请求中的json数据转为HashMap对象
 	 * @param request
@@ -59,7 +60,7 @@ public final class JsonUtils {
 	 * @throws IOException
 	 * @Description TODO
 	 */
-	public static HashMap<String,String> getRequestParams(HttpServletRequest request)
+	public static HashMap<String,String> getRequestParameters(HttpServletRequest request)
 			throws IOException{
 		if(request == null)
 			return null;

@@ -15,14 +15,14 @@ import java.util.ResourceBundle;
  * 
  * @copyright ：神农大学生软件创新中心 版权所有 © 2017
  * 
- * @author 14信息慎伟康
+ * @author 慎伟康
  * 
  * @version 1.0
  * 
  * @date 2017年7月7日 下午9:01:43
  * 
  * @Description TODO
- *		jdbc工具类
+ *		jdbc工具类，取得连接，释放资源，处理ResultSet结果集
  *		mysql-connector-java-5.1.7-bin.jar
  */
 public final class JDBCUtils {
@@ -40,6 +40,7 @@ public final class JDBCUtils {
 		username = ResourceBundle.getBundle("db").getString("username");
 	}
 	
+	
 	/**
 	 * 加载驱动
 	 */
@@ -52,6 +53,7 @@ public final class JDBCUtils {
 		}
 	}
 	
+	
 	/**
 	 * 获取数据库链接
 	 * @return
@@ -61,6 +63,7 @@ public final class JDBCUtils {
 		loadDriver();
 		return DriverManager.getConnection(url,username,password);
 	}
+	
 	
 	/**
 	 * 释放资源
@@ -128,6 +131,7 @@ public final class JDBCUtils {
 			return result;
 		}
 	}
+	
 	
 	/**
 	 * 获取一条记录
