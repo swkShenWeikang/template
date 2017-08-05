@@ -2,6 +2,7 @@ package com.snsoft.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,14 +17,14 @@ import net.sf.json.JSONObject;
  * 
  * @copyright ：神农大学生软件创新中心 版权所有 © 2016
  * 
- * @author 慎伟康
+ * @author 14信息慎伟康
  * 
  * @version 1.0
  * 
  * @date 2016年10月20日 下午1:59:44
  * 
  * @Description TODO
- *    json工具类，解析Json，封装Json。
+ *    json工具类
  *    commons-beanutils-1.9.3.jar
  *    commons-collections-3.2.2.jar
  *    commons-lang-2.6.jar
@@ -52,7 +53,6 @@ public final class JsonUtils {
 		return jsonObject.toString();
 	}
 	
-	
 	/**
 	 * 将请求中的json数据转为HashMap对象
 	 * @param request
@@ -65,7 +65,7 @@ public final class JsonUtils {
 		if(request == null)
 			return null;
 		HashMap<String,String> reqParams = new HashMap<String, String>();
-		request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding(AllConstant.ENCONDING);
 		
 		//取得数据流
 		BufferedReader reader = request.getReader();
@@ -75,7 +75,8 @@ public final class JsonUtils {
 			buffer.append(temp);
 		}
 		reader.close();
-		String acceptjson = buffer.toString();
+//		String acceptjson = buffer.toString();//若前端进行了URL编码，则需解码
+		String acceptjson = URLDecoder.decode(buffer.toString(), AllConstant.ENCONDING);
 		
 		//解析数据
 		if(!StringUtils.isBlank(acceptjson)){
